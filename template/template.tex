@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage[a4paper, total={7in, 8in}]{geometry}
+
+\setlength{\marginparwidth}{0pt}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+%Format
+\newcommand{\nipText}{\textbf{NIP:}}
+\newcommand{\regonText}{\textbf{REGON:}}
+\newcommand{\bankText}{\textbf{BANK:}}
+\newcommand{\accountText}{\textbf{Rachunek:}}
+% Format end
+
+\begin{document}
+    \begin{footnotesize}
+        \begin{flushright}
+            \begin{minipage}[t]{.4\textwidth}
+                Data wystawienia:~//issueDate// \\
+                Data sprzedaży:~//saleDate//
+            \end{minipage}
+        \end{flushright}
+    \end{footnotesize}
+
+    \ \\
+
+    \begin{small}
+        \begin{minipage}[t]{.6\textwidth}
+            \textbf{\emph{Sprzedawca:}} \\
+            //sellerCompanyName// \\
+            //sellerAddress// \\
+            //sellerPostalCode//~//sellerCity// \\ \\
+            \nipText~//sellerNip// \\
+            \regonText~//sellerRegon// \\ \\
+            \bankText~//sellerBank// \\
+            \accountText~//sellerAccount//
+        \end{minipage}
+        \begin{minipage}[t]{\textwidth}
+            \textbf{\emph{Nabywca:}} \\
+            //customerCompanyName// \\
+            //customerAddress// \\
+            //customerPostalCode//~//customerCity// \\ \\
+            \nipText~//customerNip//
+        \end{minipage}
+    \end{small}
+
+    \ \\ \ \\
+
+    \centerline{\textbf{\LARGE{Faktura VAT nr: //invoiceNumber//}}}
+
+    \ \\
+
+    \bgroup
+    \def\arraystretch{2}
+    \begin{table}[htb]
+        \resizebox{\textwidth}{!}{% use resizebox with textwidth
+            \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+                \hline
+                \textbf{Lp.} & \textbf{Nazwa usługi} & \textbf{Ilość}
+                & \textbf{Jm.} & \textbf{Cena netto} & \textbf{Wartość netto}
+                & \textbf{Stawka Vat} & \textbf{Kwota Vat} & \textbf{Wartość Brutto} \\
+                \hline
+                1 & //product// & 1 & szt. & //currencyNet//
+                & //currencyNet// & //vatRatePercentage//
+                & //currencyVat// & //currencyGross// \\
+                \hline
+            \end{tabular}
+        }\label{tab:table}
+    \end{table}
+    \egroup
+
+    \begin{small}
+        \begin{minipage}[t]{.7\textwidth}
+            Razem do zapłaty: //currencyGross// \\
+            \begin{scriptsize}
+                //currencySpellout//
+            \end{scriptsize}
+        \end{minipage}
+        \begin{minipage}[t]{\textwidth}
+            Sposób zapłaty: //payment// \\
+            Termin zapłaty: //paymentDate//
+        \end{minipage}
+    \end{small}
+
+    \ \\
+
+    \begin{small}
+        \begin{minipage}[t]{.4\textwidth}
+            \centerline{
+                \textbf{\emph{//sellerFullName//}
+                }}
+            \ \\
+            \vspace{-4ex}
+            \hline
+            \vspace{.5ex}
+            \scriptsize{
+                \centerline{Imię i nazwisko oraz podpis osoby}
+                \centerline{upoważnionej do wystawienia faktury}
+            }
+        \end{minipage}
+        \hfill
+        \begin{minipage}[t]{.4\textwidth}
+            \ \\ \\
+            \vspace{-4ex}
+            \hline
+            \vspace{.5ex}
+            \scriptsize{
+                \centerline{Imię i nazwisko oraz podpis osoby}
+                \centerline{upoważnionej do wystawienia faktury}
+            }
+        \end{minipage}
+    \end{small}
+\end{document}
