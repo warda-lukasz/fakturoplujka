@@ -11,8 +11,9 @@ You must have LaTeX and PHP installed on your system. Get LaTeX here: [The Latex
 
 ## Usage:
 
-Enter the appropriate data into the corresponding files in the ``config`` folder.
-File structure is pretty self-explanatory. There you will find a sample configuration.
+Enter the appropriate data into the corresponding files in the ``config`` folder. 
+There you will find a sample configuration.
+File structure is pretty self-explanatory. 
 
 Fill seller.json with your data.
 
