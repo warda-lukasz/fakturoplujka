@@ -3,7 +3,7 @@
 ## What am I?
 
 Fakturoplujka is a small command line app, that allows you to generate beautiful 
-invoices (in Polish format), using LaTeX
+invoices (in Polish format) with single item, using LaTeX
 
 ## Requirements:
 
