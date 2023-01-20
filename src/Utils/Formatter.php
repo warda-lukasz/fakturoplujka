@@ -50,26 +50,37 @@ class Formatter
      */
     private function getSpellOut($value): string
     {
-        $value = $this->spellout->format($value);
+        $arr = $this->convertToCurrencyParts($value);
 
-        if (strpos($value, 'przecinek')) {
-            $arr = explode('przecinek', $value);
-
+        if (isset($arr[1])) {
             return ucfirst(
-                str_ireplace('zero', '',
-                    sprintf('%s %s i %s %s',
-                        trim($arr[0]),
-                        $this->getPolishDeclension(trim($arr[0])),
-                        trim($arr[1]),
-                        $this->getPolishDeclension(trim($arr[1]), self::MONETARY_UNIT_GR)
-                    )
+                sprintf('%s %s i %s %s',
+                    trim($this->spellout->format($arr[0])),
+                    $this->getPolishDeclension(trim($arr[0])),
+                    trim($this->spellout->format($arr[1])),
+                    $this->getPolishDeclension(trim($arr[1]), self::MONETARY_UNIT_GR)
                 )
             );
         }
 
         return ucfirst(
-            str_ireplace('zero', '', $value . ' ' . $this->getPolishDeclension($value))
+            str_ireplace(
+                'zero',
+                '',
+                $this->spellout->format($value) . ' ' . $this->getPolishDeclension($value)
+            )
         );
+    }
+
+    private function convertToCurrencyParts($value): array
+    {
+        $values = explode('.', $value);
+
+        if (isset($values[1]) && strlen($values[1]) === 1) {
+            $values[1] = intval($values[1]) * 10;
+        }
+
+        return $values;
     }
 
     /**
