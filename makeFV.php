@@ -1,8 +1,6 @@
 <?php
 
-namespace App;
-
-require_once('src/Utils/TexManager.php');
+require('vendor/autoload.php');
 
 use Utils\TexManager;
 

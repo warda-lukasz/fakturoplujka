@@ -2,9 +2,6 @@
 
 namespace Model;
 
-require_once('src/Utils/Formatter.php');
-require_once('src/Model/AbstractModel.php');
-
 use NumberFormatter;
 use Utils\Formatter;
 
@@ -110,6 +107,10 @@ class Invoice extends AbstractModel
      */
     protected $invoiceNumber;
 
+    protected $issueOnLastDay;
+
+    protected $saleDateFromConfig;
+
     public function __construct($path)
     {
         $this->formatter = new Formatter();
@@ -125,10 +126,17 @@ class Invoice extends AbstractModel
      */
     private function setDates(): self
     {
-        $issueDate = date('Y-m-t', strtotime('now'));
+        if ($this->issueOnLastDay === true) {
+            $issueDate = date('Y-m-t', strtotime('now'));
+            $saleDate = $issueDate;
+        } else {
+            $issueDate = date('Y-m-d', strtotime('now'));
+            $saleDate = date('Y-m-d', strtotime($this->saleDateFromConfig));
+        }
+
         $this
             ->setIssueDate($issueDate)
-            ->setSaleDate($issueDate);
+            ->setSaleDate($saleDate);
 
         $paymentDate = date(
             'd-m-Y', strtotime($this->daysToPayment,

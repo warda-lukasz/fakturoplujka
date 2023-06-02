@@ -2,8 +2,6 @@
 
 namespace Model;
 
-require_once('src/Model/AbstractModel.php');
-
 class Customer extends AbstractModel
 {
     /**

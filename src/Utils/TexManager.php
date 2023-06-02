@@ -8,9 +8,6 @@ use Model\Invoice;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-require_once('DataManager.php');
-require_once('Formatter.php');
-
 class TexManager
 {
     const TEX_TEMPLATE = 'template/template.tex';
@@ -41,6 +38,26 @@ class TexManager
     /**
      * @return void
      */
+    private function cleanTemp(): void
+    {
+        if (file_exists(self::TEMP_PATH)) {
+            $ri = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator(
+                    self::TEMP_PATH,
+                    FilesystemIterator::SKIP_DOTS
+                ),
+                RecursiveIteratorIterator::CHILD_FIRST
+            );
+
+            foreach ($ri as $file) {
+                $file->isDir() ? rmdir($file) : unlink($file);
+            }
+        }
+    }
+
+    /**
+     * @return void
+     */
     public function parseTemplate(): void
     {
         $template = file_get_contents(self::TEX_TEMPLATE);
@@ -64,7 +81,8 @@ class TexManager
         $invoiceNumber = sprintf("%s_%s", $arrKey + 1, (new DateTime('now'))->format('m_Y'));
         $invoice->setInvoiceNumber(str_replace('_', '/', $invoiceNumber));
 
-        $filename = sprintf("%s_%s",
+        $filename = sprintf(
+            "%s_%s",
             preg_replace('/[^A-Za-z0-9\-]/', '', $invoice->getSeller()->getSellerCompanyName()),
             $invoiceNumber
         );
@@ -108,23 +126,5 @@ class TexManager
             self::TEMP_PATH . $filename . '.pdf',
             self::OUTPUT_BASE_PATH . '/' . pathinfo(self::TEMP_PATH . $filename . '.pdf', PATHINFO_BASENAME)
         );
-    }
-
-    /**
-     * @return void
-     */
-    private function cleanTemp(): void
-    {
-        if (file_exists(self::TEMP_PATH)) {
-
-            $ri = new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator(self::TEMP_PATH, FilesystemIterator::SKIP_DOTS),
-                RecursiveIteratorIterator::CHILD_FIRST
-            );
-
-            foreach ($ri as $file) {
-                $file->isDir() ? rmdir($file) : unlink($file);
-            }
-        }
     }
 }

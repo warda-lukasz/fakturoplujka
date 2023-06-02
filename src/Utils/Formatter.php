@@ -54,7 +54,8 @@ class Formatter
 
         if (isset($arr[1])) {
             return ucfirst(
-                sprintf('%s %s i %s %s',
+                sprintf(
+                    '%s %s i %s %s',
                     trim($this->spellout->format($arr[0])),
                     $this->getPolishDeclension(trim($arr[0])),
                     trim($this->spellout->format($arr[1])),
