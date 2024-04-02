@@ -12,7 +12,7 @@ class TexManager
 {
     const TEX_TEMPLATE = 'template/template.tex';
 
-    const OUTPUT_BASE_PATH = 'output';
+    const OUTPUT_BASE_PATH = 'output/';
 
     const TEMP_PATH = 'temp/';
 
@@ -124,7 +124,7 @@ class TexManager
 
         rename(
             self::TEMP_PATH . $filename . '.pdf',
-            self::OUTPUT_BASE_PATH . '/' . pathinfo(self::TEMP_PATH . $filename . '.pdf', PATHINFO_BASENAME)
+            self::OUTPUT_BASE_PATH  . pathinfo(self::TEMP_PATH . $filename . '.pdf', PATHINFO_BASENAME)
         );
     }
 }

@@ -4,10 +4,6 @@ namespace Model;
 
 abstract class AbstractModel
 {
-    /**
-     * @param string $path
-     * @return $this
-     */
     public function setFromFile(string $path): self
     {
         $file = file_get_contents($path);
@@ -20,28 +16,16 @@ abstract class AbstractModel
         return $this;
     }
 
-    /**
-     * @param $name
-     * @param $value
-     * @return void
-     */
-    public function __set($name, $value): void
+    public function __set(string $name, $value): void
     {
         $this->$name = $value;
     }
 
-    /**
-     * @param $name
-     * @return mixed
-     */
-    public function __get($name)
+    public function __get(string $name)
     {
         return $this->$name;
     }
 
-    /**
-     * @return array
-     */
     public function getPatternsAndReplacements(): array
     {
         $arr = [];
@@ -53,4 +37,3 @@ abstract class AbstractModel
         return $arr;
     }
 }
-

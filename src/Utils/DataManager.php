@@ -18,19 +18,10 @@ class DataManager
     const SELLER_PATH = 'config/seller.json';
     const INVOICES_DIR = 'config/invoices';
 
-    /**
-     * @var Seller
-     */
     private $seller;
 
-    /**
-     * @var
-     */
     private $invoices;
 
-    /**
-     * @var array
-     */
     private $files;
 
     public function __construct()
@@ -40,9 +31,6 @@ class DataManager
         $this->prepareInvoices();
     }
 
-    /**
-     * @return array
-     */
     private function prepareConfigDirStructure(): array
     {
         $rri = new RecursiveIteratorIterator(
@@ -65,9 +53,6 @@ class DataManager
         return $files;
     }
 
-    /**
-     * @return void
-     */
     private function prepareInvoices(): void
     {
         foreach ($this->files as $invoiceName => $invoiceData) {
@@ -84,9 +69,6 @@ class DataManager
         }
     }
 
-    /**
-     * @return array
-     */
     public function getInvoices(): array
     {
         return $this->invoices;
