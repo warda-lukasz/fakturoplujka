@@ -7,30 +7,30 @@ use Utils\Formatter;
 
 class Invoice extends AbstractModel
 {
-    protected $invoiceName;
-    protected $product;
-    protected $net;
-    protected $vatRate;
-    protected $payment;
-    protected $daysToPayment;
-    protected $issueDate;
-    protected $paymentDate;
-    protected $saleDate;
-    protected $vat;
-    protected $vatRatePercentage;
-    protected $gross;
-    protected $formatter;
-    protected $currencyNet;
-    protected $currencyVat;
-    protected $currencyGross;
-    protected $currencySpellout;
-    protected $seller;
-    protected $customer;
-    protected $invoiceNumber;
-    protected $issueOnLastDay;
-    protected $saleDateFromConfig;
+    protected string $invoiceName;
+    protected string $product;
+    protected string $net;
+    protected string $vatRate;
+    protected string $payment;
+    protected string $daysToPayment;
+    protected string $issueDate;
+    protected string $paymentDate;
+    protected string $saleDate;
+    protected float $vat;
+    protected string $vatRatePercentage;
+    protected float $gross;
+    protected Formatter $formatter;
+    protected string $currencyNet;
+    protected string $currencyVat;
+    protected string $currencyGross;
+    protected string $currencySpellout;
+    protected Seller $seller;
+    protected Customer $customer;
+    protected string $invoiceNumber;
+    protected bool $issueOnLastDay;
+    protected string $saleDateFromConfig;
 
-    public function __construct($path)
+    public function __construct(string $path)
     {
         $this->formatter = new Formatter();
         $this
@@ -42,6 +42,18 @@ class Invoice extends AbstractModel
 
     private function setDates(): self
     {
+        [$issueDate, $saleDate, $paymentDate] = $this->prepareDates();
+
+        $this
+            ->setIssueDate($issueDate)
+            ->setSaleDate($saleDate)
+            ->setPaymentDate($paymentDate);
+
+        return $this;
+    }
+
+    private function prepareDates(): array
+    {
         if ($this->issueOnLastDay === true) {
             $issueDate = date('Y-m-t', strtotime('now'));
             $saleDate = $issueDate;
@@ -50,18 +62,19 @@ class Invoice extends AbstractModel
             $saleDate = date('Y-m-d', strtotime($this->saleDateFromConfig));
         }
 
-        $this
-            ->setIssueDate($issueDate)
-            ->setSaleDate($saleDate);
-
         $paymentDate = date(
             'd-m-Y', strtotime(
                 $this->daysToPayment,
-                strtotime($this->issueDate)
+                strtotime($issueDate)
             )
         );
 
-        $this->setPaymentDate($paymentDate);
+        return [$issueDate, $saleDate, $paymentDate];
+    }
+
+    public function setPaymentDate(string $paymentDate): self
+    {
+        $this->paymentDate = $paymentDate;
 
         return $this;
     }
@@ -80,21 +93,18 @@ class Invoice extends AbstractModel
         return $this;
     }
 
-    public function setPaymentDate(string $paymentDate): self
-    {
-        $this->paymentDate = $paymentDate;
-
-        return $this;
-    }
-
     private function setStrings(): self
     {
         $this
             ->setCurrencyGross($this->formatter->getFormattedNumber($this->gross))
             ->setCurrencyNet($this->formatter->getFormattedNumber($this->net))
             ->setCurrencyVat($this->formatter->getFormattedNumber($this->vat))
-            ->setCurrencySpellout($this->formatter->getFormattedNumber($this->gross, NumberFormatter::SPELLOUT))
-            ->setVatRatePercentage($this->formatter->getFormattedNumber($this->vatRate, NumberFormatter::PERCENT));
+            ->setCurrencySpellout(
+                $this->formatter->getFormattedNumber($this->gross, NumberFormatter::SPELLOUT)
+            )
+            ->setVatRatePercentage(
+                $this->formatter->getFormattedNumber($this->vatRate, NumberFormatter::PERCENT)
+            );
 
         return $this;
     }

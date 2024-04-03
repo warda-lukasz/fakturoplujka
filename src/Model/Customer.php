@@ -4,11 +4,11 @@ namespace Model;
 
 class Customer extends AbstractModel
 {
-    protected $customerCompanyName;
-    protected $customerAddress;
-    protected $customerPostalCode;
-    protected $customerCity;
-    protected $customerNip;
+    protected string $customerCompanyName;
+    protected string $customerAddress;
+    protected string $customerPostalCode;
+    protected string $customerCity;
+    protected string $customerNip;
 
     public function getCustomerCompanyName(): string
     {

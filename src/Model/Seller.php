@@ -2,19 +2,17 @@
 
 namespace Model;
 
-require_once('src/Model/AbstractModel.php');
-
 class Seller extends AbstractModel
 {
-    protected $sellerCompanyName;
-    protected $sellerFullName;
-    protected $sellerAddress;
-    protected $sellerPostalCode;
-    protected $sellerCity;
-    protected $sellerNip;
-    protected $sellerRegon;
-    protected $sellerAccount;
-    protected $sellerBank;
+    protected string $sellerCompanyName;
+    protected string $sellerFullName;
+    protected string $sellerAddress;
+    protected string $sellerPostalCode;
+    protected string $sellerCity;
+    protected string $sellerNip;
+    protected string $sellerRegon;
+    protected string $sellerAccount;
+    protected string $sellerBank;
 
     public function __construct(string $sellerPath)
     {
