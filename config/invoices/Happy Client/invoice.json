@@ -3,5 +3,7 @@
   "net": 409,
   "vatRate": 0.23,
   "payment": "PRZELEW",
-  "daysToPayment": "+10 day"
+  "daysToPayment": "+10 day",
+  "issueOnLastDay": false,
+  "saleDateFromConfig": "22-01-2024"
 }
