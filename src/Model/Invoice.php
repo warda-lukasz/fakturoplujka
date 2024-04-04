@@ -9,8 +9,8 @@ class Invoice extends AbstractModel
 {
     protected string $invoiceName;
     protected string $product;
-    protected string $net;
-    protected string $vatRate;
+    protected float $net;
+    protected float $vatRate;
     protected string $payment;
     protected string $daysToPayment;
     protected string $issueDate;
@@ -147,7 +147,7 @@ class Invoice extends AbstractModel
     private function setVatAndGross(): self
     {
         $vat = round($this->net * $this->vatRate, 2);
-        $this->setVat($vat)->setGross(($this->net) + $vat);
+        $this->setVat($vat)->setGross($this->net + $vat);
 
         return $this;
     }
