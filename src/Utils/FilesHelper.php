@@ -14,7 +14,7 @@ class FilesHelper
     public const string OUTPUT_BASE_PATH = 'output/';
     public const string TEMP_PATH = 'temp/';
 
-    public static function getDirectoryIterator(string $dir)
+    public static function getDirectoryIterator(string $dir): RecursiveIteratorIterator
     {
         return new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator(
