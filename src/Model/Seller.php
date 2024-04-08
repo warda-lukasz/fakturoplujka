@@ -14,11 +14,6 @@ class Seller extends AbstractModel
     protected string $sellerAccount;
     protected string $sellerBank;
 
-    public function __construct(string $sellerPath)
-    {
-        $this->setFromFile($sellerPath);
-    }
-
     public function getSellerCompanyName(): string
     {
         return $this->sellerCompanyName;

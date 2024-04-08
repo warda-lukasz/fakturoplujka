@@ -41,9 +41,7 @@ class DataManager
     private function prepareInvoices(): void
     {
         foreach ($this->files as $invoiceName => $invoiceData) {
-            $customer = (new Customer())
-                ->setFromFile($invoiceData['customer']);
-
+            $customer = new Customer($invoiceData['customer']);
             $invoice = (new Invoice($invoiceData['invoice']))
                 ->setInvoiceName($invoiceName)
                 ->setSeller($this->seller)

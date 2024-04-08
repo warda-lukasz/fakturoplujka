@@ -32,10 +32,10 @@ class Invoice extends AbstractModel
 
     public function __construct(string $path)
     {
+        parent::__construct($path);
+
         $this->formatter = new Formatter();
-        $this
-            ->setFromFile($path)
-            ->setVatAndGross()
+        $this->setVatAndGross()
             ->setStrings()
             ->setDates();
     }

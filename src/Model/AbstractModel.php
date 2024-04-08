@@ -4,6 +4,11 @@ namespace Model;
 
 abstract class AbstractModel
 {
+    public function __construct(string $path)
+    {
+        $this->setFromFile($path);
+    }
+    
     public function setFromFile(string $path): self
     {
         $file = file_get_contents($path);
