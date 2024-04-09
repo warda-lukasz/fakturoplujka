@@ -2,7 +2,7 @@
 
 namespace Model;
 
-abstract class AbstractModel
+abstract class AbstractModel implements ModelInterface
 {
     public function __construct(string $path)
     {
@@ -11,19 +11,18 @@ abstract class AbstractModel
     
     public function setFromFile(string $path): self
     {
-        $file = file_get_contents($path);
-        $arr = json_decode($file, true);
+        $arr = json_decode(file_get_contents($path), true);
 
-        foreach ($arr as $key => $value) {
-            $this->__set($key, $value);
+        foreach ($arr as $property => $value) {
+            $this->__set($property, $value);
         }
 
         return $this;
     }
 
-    public function __set(string $name, $value): void
+    public function __set(string $property, $value): void
     {
-        $this->$name = $value;
+        $this->$property = $value;
     }
 
     public function __get(string $name)

@@ -24,4 +24,15 @@ class FilesHelper
             RecursiveIteratorIterator::CHILD_FIRST
         );
     }
+
+    public static function cleanDir(string $dir): void
+    {
+        if (file_exists($dir)) {
+            $ri = self::getDirectoryIterator($dir);
+
+            foreach ($ri as $file) {
+                $file->isDir() ? rmdir($file) : unlink($file);
+            }
+        }
+    }
 }
