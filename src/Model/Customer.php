@@ -2,16 +2,7 @@
 
 namespace Model;
 
-class Customer extends AbstractModel
+class Customer extends BusinessModel implements ModelInterface
 {
-    protected string $customerCompanyName;
-    protected string $customerAddress;
-    protected string $customerPostalCode;
-    protected string $customerCity;
-    protected string $customerNip;
-
-    public function getCustomerCompanyName(): string
-    {
-        return $this->customerCompanyName;
-    }
+    protected const string MODEL_PREFIX = 'customer';
 }

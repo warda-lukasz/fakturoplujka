@@ -1,7 +1,7 @@
 {
-  "customerCompanyName": "Cezary Jóźwiak PHU",
-  "customerAddress": "Herbaciana 3/49",
-  "customerPostalCode": "31-942",
-  "customerCity": "Rzeszów",
-  "customerNip": "7521829450"
+  "companyName": "Cezary Jóźwiak PHU",
+  "address": "Herbaciana 3/49",
+  "postalCode": "31-942",
+  "city": "Rzeszów",
+  "nip": "7521829450"
 }

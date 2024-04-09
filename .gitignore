@@ -32,4 +32,6 @@ fabric.properties
 .idea/httpRequests
 .idea/caches/build_file_checksums.ser
 /vendor/
-/config/*
+config/*
+additional
+conf_backup

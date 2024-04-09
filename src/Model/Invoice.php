@@ -5,7 +5,7 @@ namespace Model;
 use NumberFormatter;
 use Utils\Formatter;
 
-class Invoice extends AbstractModel
+class Invoice extends AbstractModel implements ModelInterface
 {
     protected string $invoiceName;
     protected string $product;
@@ -200,6 +200,66 @@ class Invoice extends AbstractModel
     public function setInvoiceNumber(string $invoiceNumber): self
     {
         $this->invoiceNumber = $invoiceNumber;
+
+        return $this;
+    }
+
+    public function getProduct(): string
+    {
+        return $this->product;
+    }
+
+    public function setProduct(string $product): self
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    public function getNet(): float
+    {
+        return $this->net;
+    }
+
+    public function setNet(float $net): self
+    {
+        $this->net = $net;
+
+        return $this;
+    }
+
+    public function getVatRate(): float
+    {
+        return $this->vatRate;
+    }
+
+    public function setVatRate(float $vatRate): self
+    {
+        $this->vatRate = $vatRate;
+
+        return $this;
+    }
+
+    public function getPayment(): string
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(string $payment): self
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+    public function getDaysToPayment(): string
+    {
+        return $this->daysToPayment;
+    }
+
+    public function setDaysToPayment(string $daysToPayment): self
+    {
+        $this->daysToPayment = $daysToPayment;
 
         return $this;
     }

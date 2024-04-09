@@ -1,7 +1,7 @@
 {
-  "customerCompanyName": "Marcel Ciesielski",
-  "customerAddress": "Kilińskiego 4",
-  "customerPostalCode": "17-349",
-  "customerCity": "Rybnik",
-  "customerNip": 5273810373
+  "companyName": "Marcel Ciesielski",
+  "address": "Kilińskiego 4",
+  "postalCode": "17-349",
+  "city": "Rybnik",
+  "nip": 5273810373
 }

@@ -2,20 +2,60 @@
 
 namespace Model;
 
-class Seller extends AbstractModel
+class Seller extends BusinessModel implements ModelInterface
 {
-    protected string $sellerCompanyName;
-    protected string $sellerFullName;
-    protected string $sellerAddress;
-    protected string $sellerPostalCode;
-    protected string $sellerCity;
-    protected string $sellerNip;
-    protected string $sellerRegon;
-    protected string $sellerAccount;
-    protected string $sellerBank;
+    protected const string MODEL_PREFIX = 'seller';
 
-    public function getSellerCompanyName(): string
+    protected string $fullName;
+    protected string $regon;
+    protected string $account;
+    protected string $bank;
+
+    public function getFullName(): string
     {
-        return $this->sellerCompanyName;
+        return $this->fullName;
+    }
+
+    public function setFullName(string $fullName): self
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getRegon(): string
+    {
+        return $this->regon;
+    }
+
+    public function setRegon(string $regon): self
+    {
+        $this->regon = $regon;
+
+        return $this;
+    }
+
+    public function getAccount(): string
+    {
+        return $this->account;
+    }
+
+    public function setAccount(string $account): self
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    public function getBank(): string
+    {
+        return $this->bank;
+    }
+
+    public function setBank(string $bank): self
+    {
+        $this->bank = $bank;
+
+        return $this;
     }
 }

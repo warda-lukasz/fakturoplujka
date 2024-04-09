@@ -4,11 +4,13 @@ namespace Model;
 
 abstract class AbstractModel implements ModelInterface
 {
+    protected const string MODEL_PREFIX = '';
+
     public function __construct(string $path)
     {
         $this->setFromFile($path);
     }
-    
+
     public function setFromFile(string $path): self
     {
         $arr = json_decode(file_get_contents($path), true);
@@ -20,20 +22,14 @@ abstract class AbstractModel implements ModelInterface
         return $this;
     }
 
-    /*
-    * @param mixed $value
-    */
-    public function __set(string $property, $value): void
+    public function __get(string $property): mixed
     {
-        $this->$property = $value;
+        return $this->$property;
     }
 
-    /*
-    * @return mixed 
-    */
-    public function __get(string $name)
+    public function __set(string $property, mixed $value): void
     {
-        return $this->$name;
+        $this->$property = $value;
     }
 
     public function getPatternsAndReplacements(): array
@@ -41,7 +37,8 @@ abstract class AbstractModel implements ModelInterface
         $arr = [];
         foreach ($this as $key => $value) {
             if (is_object($value)) continue;
-            $arr["%(\/\/)({$key})(\/\/)%"] = $value;
+            $keyString = $this::MODEL_PREFIX . $key;
+            $arr["%(\/\/)({$keyString})(\/\/)%"] = $value;
         }
 
         return $arr;

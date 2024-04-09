@@ -36,7 +36,7 @@ class TexManager
     
         $filename = sprintf(
             '%s_%s',
-            str_replace(' ','',$invoice->getSeller()->getSellerCompanyName()),
+            str_replace(' ','',$invoice->getSeller()->getCompanyName()),
             $invoiceNumber
         );
 
