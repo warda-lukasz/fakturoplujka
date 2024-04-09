@@ -19,16 +19,16 @@ class Invoice extends AbstractModel
     protected float $vat;
     protected string $vatRatePercentage;
     protected float $gross;
-    protected Formatter $formatter;
     protected string $currencyNet;
     protected string $currencyVat;
     protected string $currencyGross;
     protected string $currencySpellout;
-    protected Seller $seller;
-    protected Customer $customer;
     protected string $invoiceNumber;
     protected bool $issueOnLastDay;
     protected string $saleDateFromConfig;
+    protected Formatter $formatter;
+    protected Seller $seller;
+    protected Customer $customer;
 
     public function __construct(string $path)
     {
@@ -190,7 +190,7 @@ class Invoice extends AbstractModel
         return $this;
     }
 
-    public function setInvoiceName($invoiceName): self
+    public function setInvoiceName(string $invoiceName): self
     {
         $this->invoiceName = $invoiceName;
 

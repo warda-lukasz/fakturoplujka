@@ -20,11 +20,17 @@ abstract class AbstractModel implements ModelInterface
         return $this;
     }
 
+    /*
+    * @param mixed $value
+    */
     public function __set(string $property, $value): void
     {
         $this->$property = $value;
     }
 
+    /*
+    * @return mixed 
+    */
     public function __get(string $name)
     {
         return $this->$name;
