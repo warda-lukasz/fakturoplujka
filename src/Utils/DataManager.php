@@ -2,9 +2,9 @@
 
 namespace Utils;
 
-use Model\Customer;
-use Model\Invoice;
-use Model\Seller;
+use Models\Customer;
+use Models\Invoice;
+use Models\Seller;
 use RecursiveDirectoryIterator;
 
 class DataManager

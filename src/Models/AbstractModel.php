@@ -1,6 +1,8 @@
 <?php
 
-namespace Model;
+namespace Models;
+
+use Interfaces\ModelInterface;
 
 abstract class AbstractModel implements ModelInterface
 {

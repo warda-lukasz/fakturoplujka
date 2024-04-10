@@ -17,17 +17,6 @@ class FilesHelper
 
     private const string GIT_KEEP = '.gitkeep';
 
-    public static function getDirectoryIterator(string $dir): RecursiveIteratorIterator
-    {
-        return new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator(
-                $dir,
-                FilesystemIterator::SKIP_DOTS
-            ),
-            RecursiveIteratorIterator::CHILD_FIRST
-        );
-    }
-
     public static function cleanDir(string $dir): void
     {
         if (file_exists($dir)) {
@@ -39,5 +28,16 @@ class FilesHelper
                 $file->isDir() ? rmdir($file) : unlink($file);
             }
         }
+    }
+
+    public static function getDirectoryIterator(string $dir): RecursiveIteratorIterator
+    {
+        return new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(
+                $dir,
+                FilesystemIterator::SKIP_DOTS
+            ),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
     }
 }

@@ -17,8 +17,10 @@ class Formatter
         $this->spellout = new NumberFormatter($locale, NumberFormatter::SPELLOUT);
     }
 
-    public function getFormattedNumber(string $value, int $numberFormatterStyle = NumberFormatter::CURRENCY): string
-    {
+    public function getFormattedNumber(
+        string $value,
+        int    $numberFormatterStyle = NumberFormatter::CURRENCY
+    ): string {
         return match ($numberFormatterStyle) {
             NumberFormatter::SPELLOUT => $this->getSpellOut($value),
             NumberFormatter::PERCENT => $value * 100 . '\\%',
@@ -48,8 +50,25 @@ class Formatter
         return [$main, $decimal];
     }
 
-    private function getPolishDeclension(string $baseString, string $monetaryUnit = self::MONETARY_UNIT_PLN): string
+    private function formatBothCurrencyParts(int $main, int $decimal): string
     {
+        return ucfirst(
+            sprintf(
+                '%s %s i %s %s',
+                trim($this->spellout->format($main)),
+                $this->getPolishDeclension(trim($main)),
+                trim($this->spellout->format($decimal)),
+                $this->getPolishDeclension(
+                    trim($decimal), self::MONETARY_UNIT_GR
+                )
+            )
+        );
+    }
+
+    private function getPolishDeclension(
+        string $baseString,
+        string $monetaryUnit = self::MONETARY_UNIT_PLN
+    ): string {
         $stringArr = explode(' ', $baseString);
         $wordCount = count($stringArr);
         $lastWord = array_pop($stringArr);
@@ -61,26 +80,15 @@ class Formatter
         };
     }
 
-    private function handleLastWordIsOneCase(int $wordCount, string $monetaryUnit): string
-    {
+    private function handleLastWordIsOneCase(
+        int    $wordCount,
+        string $monetaryUnit
+    ): string {
         if ($wordCount === 1) {
             return $monetaryUnit === self::MONETARY_UNIT_GR ? 'grosz' : 'złoty';
         } else {
             return $monetaryUnit === self::MONETARY_UNIT_GR ? 'groszy' : 'złotych';
         }
-    }
-
-    private function formatBothCurrencyParts(int $main, int $decimal): string
-    {
-        return ucfirst(
-            sprintf(
-                '%s %s i %s %s',
-                trim($this->spellout->format($main)),
-                $this->getPolishDeclension(trim($main)),
-                trim($this->spellout->format($decimal)),
-                $this->getPolishDeclension(trim($decimal), self::MONETARY_UNIT_GR)
-            )
-        );
     }
 
     private function formatOnlyMainPart(int $main): string

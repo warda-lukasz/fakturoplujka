@@ -1,6 +1,8 @@
 <?php
 
-namespace Model;
+namespace Models;
+
+use Interfaces\ModelInterface;
 
 class Customer extends BusinessModel implements ModelInterface
 {

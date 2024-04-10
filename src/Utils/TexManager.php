@@ -3,7 +3,7 @@
 namespace Utils;
 
 use DateTime;
-use Model\Invoice;
+use Models\Invoice;
 
 class TexManager
 {
@@ -31,12 +31,16 @@ class TexManager
 
     private function makeFiles(Invoice $invoice, int $invoiceNumber): void
     {
-        $invoiceNumber = sprintf("%s_%s", $invoiceNumber, (new DateTime('now'))->format('m_Y'));
+        $invoiceNumber = sprintf(
+            "%s_%s",
+            $invoiceNumber,
+            (new DateTime('now'))->format('m_Y')
+        );
         $invoice->setInvoiceNumber(str_replace('_', '/', $invoiceNumber));
-    
+
         $filename = sprintf(
             '%s_%s',
-            str_replace(' ','',$invoice->getSeller()->getCompanyName()),
+            str_replace(' ', '', $invoice->getSeller()->getCompanyName()),
             $invoiceNumber
         );
 
@@ -77,7 +81,7 @@ class TexManager
             FilesHelper::TEMP_PATH . $filename
         );
     }
-    
+
     private function moveToOutput(string $filename): void
     {
         rename(

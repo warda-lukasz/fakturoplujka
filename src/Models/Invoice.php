@@ -1,7 +1,8 @@
 <?php
 
-namespace Model;
+namespace Models;
 
+use Interfaces\ModelInterface;
 use NumberFormatter;
 use Utils\Formatter;
 
@@ -100,10 +101,14 @@ class Invoice extends AbstractModel implements ModelInterface
             ->setCurrencyNet($this->formatter->getFormattedNumber($this->net))
             ->setCurrencyVat($this->formatter->getFormattedNumber($this->vat))
             ->setCurrencySpellout(
-                $this->formatter->getFormattedNumber($this->gross, NumberFormatter::SPELLOUT)
+                $this->formatter->getFormattedNumber(
+                    $this->gross, NumberFormatter::SPELLOUT
+                )
             )
             ->setVatRatePercentage(
-                $this->formatter->getFormattedNumber($this->vatRate, NumberFormatter::PERCENT)
+                $this->formatter->getFormattedNumber(
+                    $this->vatRate, NumberFormatter::PERCENT
+                )
             );
 
         return $this;
@@ -200,66 +205,6 @@ class Invoice extends AbstractModel implements ModelInterface
     public function setInvoiceNumber(string $invoiceNumber): self
     {
         $this->invoiceNumber = $invoiceNumber;
-
-        return $this;
-    }
-
-    public function getProduct(): string
-    {
-        return $this->product;
-    }
-
-    public function setProduct(string $product): self
-    {
-        $this->product = $product;
-
-        return $this;
-    }
-
-    public function getNet(): float
-    {
-        return $this->net;
-    }
-
-    public function setNet(float $net): self
-    {
-        $this->net = $net;
-
-        return $this;
-    }
-
-    public function getVatRate(): float
-    {
-        return $this->vatRate;
-    }
-
-    public function setVatRate(float $vatRate): self
-    {
-        $this->vatRate = $vatRate;
-
-        return $this;
-    }
-
-    public function getPayment(): string
-    {
-        return $this->payment;
-    }
-
-    public function setPayment(string $payment): self
-    {
-        $this->payment = $payment;
-
-        return $this;
-    }
-
-    public function getDaysToPayment(): string
-    {
-        return $this->daysToPayment;
-    }
-
-    public function setDaysToPayment(string $daysToPayment): self
-    {
-        $this->daysToPayment = $daysToPayment;
 
         return $this;
     }
