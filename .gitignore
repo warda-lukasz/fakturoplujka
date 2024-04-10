@@ -35,3 +35,4 @@ fabric.properties
 config/*
 additional
 conf_backup
+copyOutput.sh
