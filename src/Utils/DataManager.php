@@ -30,6 +30,7 @@ class DataManager
             $modelType = (explode('.', $file->getFilename()))[0];
 
             $this->files[$lastFolder][$modelType] = $file->getPath() . '/' . $file->getFilename();
+            ksort($this->files);
         }
     }
 
