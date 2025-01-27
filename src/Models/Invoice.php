@@ -27,6 +27,8 @@ class Invoice extends AbstractModel implements ModelInterface
     protected string $invoiceNumber;
     protected bool $issueOnLastDay;
     protected string $saleDateFromConfig;
+    protected string $mpkCode;
+
     protected Formatter $formatter;
     protected Seller $seller;
     protected Customer $customer;
