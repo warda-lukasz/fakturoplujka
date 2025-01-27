@@ -5,18 +5,6 @@
 Fakturoplujka is a small command line app, that allows you to generate beautiful 
 invoices (in Polish format) with single item, using LaTeX
 
-## Requirements:
-
-You must have LaTeX and PHP installed on your system. Get LaTeX here: [The Latex Project](https://www.latex-project.org/get/).
-```bash
-sudo apt install texlive
-```
-Also install Polish language if you want to use default template:
-
-```bash
-sudo apt install texlive-lang-polish
-```
-
 
 ## Usage:
 
@@ -30,9 +18,16 @@ Create your own configuration, creating folders containing invoice.json and cust
 files with your customer and invoice data. 
 The app will generate as many invoices as folders have been created.
 
-To generate your invoices, just run following command:
+To test everything, run the app with the following command:
+
 ```bash
-php makeFV.php
+make first
+```
+
+If everything is okay, you can generate invoices with the following command:
+
+```bash
+make fv
 ```
 
 ## Have fun! 🥳
