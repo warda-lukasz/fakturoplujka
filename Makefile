@@ -6,7 +6,4 @@ run:
 build:
 	docker compose build
 
-copy-files:
-	./copyOutput.sh
-
-fv: run copy-files
+fv: run 
