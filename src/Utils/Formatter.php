@@ -59,7 +59,8 @@ class Formatter
                 $this->getPolishDeclension(trim($main)),
                 trim($this->spellout->format($decimal)),
                 $this->getPolishDeclension(
-                    trim($decimal), self::MONETARY_UNIT_GR
+                    trim($decimal),
+                    self::MONETARY_UNIT_GR
                 )
             )
         );

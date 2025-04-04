@@ -1,17 +1,17 @@
 {
-  "name": "bingobongo/fakturoplujka",
-  "type": "project",
-  "autoload": {
-    "psr-4": {
-      "": "src/"
+    "name": "bingobongo/fakturoplujka",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.3.0 <9.0.0",
+        "ext-intl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^7.0"
     }
-  },
-  "require": {
-    "php": "8.3.*",
-    "ext-intl": "*",
-    "ext-json": "*"
-  },
-  "require-dev": {
-    "symfony/var-dumper": "^7.0"
-  }
 }

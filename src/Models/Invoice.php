@@ -66,7 +66,8 @@ class Invoice extends AbstractModel implements ModelInterface
         }
 
         $paymentDate = date(
-            'd-m-Y', strtotime(
+            'd-m-Y',
+            strtotime(
                 $this->daysToPayment,
                 strtotime($issueDate)
             )
@@ -104,12 +105,14 @@ class Invoice extends AbstractModel implements ModelInterface
             ->setCurrencyVat($this->formatter->getFormattedNumber($this->vat))
             ->setCurrencySpellout(
                 $this->formatter->getFormattedNumber(
-                    $this->gross, NumberFormatter::SPELLOUT
+                    $this->gross,
+                    NumberFormatter::SPELLOUT
                 )
             )
             ->setVatRatePercentage(
                 $this->formatter->getFormattedNumber(
-                    $this->vatRate, NumberFormatter::PERCENT
+                    $this->vatRate,
+                    NumberFormatter::PERCENT
                 )
             );
 

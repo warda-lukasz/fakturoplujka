@@ -23,7 +23,7 @@ class PromptHelper
 
     public function stopClockString(): string
     {
-        return $this->getFormattedText($this->stopClock().'ms', Color::Cyan, Format::Underline, Format::Bold);
+        return $this->getFormattedText($this->stopClock() . 'ms', Color::Cyan, Format::Underline, Format::Bold);
     }
 
     public function printDivider(
