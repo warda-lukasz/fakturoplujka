@@ -6,48 +6,49 @@ use Models\Customer;
 use Models\Invoice;
 use Models\Seller;
 use RecursiveDirectoryIterator;
+use Symfony\Component\Yaml\Yaml;
+use Symfony\Componenet\VarDumper\VarDumper;
 
 class DataManager
 {
     private array $invoices;
-    private array $files;
+    private string $output;
 
     public function __construct()
     {
-        $this->prepareConfigDirStructure();
-        $this->prepareInvoices();
+        $this->parseData();
     }
 
-    private function prepareConfigDirStructure(): void
+    private function parseData(): void
     {
-        $directoryIterator = FilesHelper::getDirectoryIterator(FilesHelper::INVOICES_DIR);
+        $config = Yaml::parseFile(FilesHelper::CONFIG_PATH . 'config.yml');
+        $this->output = $config['outputDir'];
 
-        /** @var RecursiveDirectoryIterator $file */
-        foreach ($directoryIterator as $file) {
-            if ($file->isDir()) continue;
-            $dirArr = explode('/', $file->getPath());
-            $lastFolder = array_pop($dirArr);
-            $modelType = (explode('.', $file->getFilename()))[0];
+        $seller = new Seller($config['seller']);
+        $invoiceNumber = 1;
 
-            $this->files[$lastFolder][$modelType] = $file->getPath() . '/' . $file->getFilename();
-            ksort($this->files);
-        }
-    }
+        foreach ($config['customers'] as $customerData) {
+            $customer = new Customer($customerData);
 
-    private function prepareInvoices(): void
-    {
-        foreach ($this->files as $invoiceName => $invoiceData) {
-            $invoice = (new Invoice($invoiceData['invoice']))
-                ->setInvoiceName($invoiceName)
-                ->setSeller(new Seller(FilesHelper::SELLER_PATH))
-                ->setCustomer(new Customer($invoiceData['customer']));
-
-            $this->invoices[] = $invoice;
+            foreach ($customerData['invoices'] as $invoiceData) {
+                $invoice = new Invoice($invoiceData)
+                    ->setInvoiceName($seller->invoiceTitlePrefix . $invoiceNumber)
+                    ->setInvoiceNumber($invoiceNumber)
+                    ->setSeller($seller)
+                    ->setCustomer($customer);
+                $this->invoices[] = $invoice;
+                $invoiceNumber++;
+            }
         }
     }
 
     public function getInvoices(): array
     {
         return $this->invoices;
+    }
+
+    public function getOutput(): string
+    {
+        return $this->output;
     }
 }

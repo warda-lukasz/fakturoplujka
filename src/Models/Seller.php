@@ -11,4 +11,5 @@ class Seller extends BusinessModel implements ModelInterface
     protected string $regon;
     protected string $account;
     protected string $bank;
+    protected string $invoiceTitlePrefix;
 }

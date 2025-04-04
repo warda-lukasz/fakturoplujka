@@ -33,11 +33,12 @@ class Invoice extends AbstractModel implements ModelInterface
     protected Seller $seller;
     protected Customer $customer;
 
-    public function __construct(string $path)
+    public function __construct(array $data)
     {
-        parent::__construct($path);
+        parent::__construct($data);
 
         $this->formatter = new Formatter();
+
         $this->setVatAndGross()
             ->setStrings()
             ->setDates();
@@ -57,12 +58,18 @@ class Invoice extends AbstractModel implements ModelInterface
 
     private function prepareDates(): array
     {
-        if ($this->issueOnLastDay === true) {
+        if ($this->issueOnTheLastDay === true) {
             $issueDate = date('Y-m-t', strtotime('now'));
             $saleDate = $issueDate;
         } else {
-            $issueDate = date('Y-m-d', strtotime('now'));
-            $saleDate = date('Y-m-d', strtotime($this->saleDateFromConfig));
+
+            $issueDate = empty($this->dateToIssue) ?
+                date('Y-m-d', strtotime('now')) :
+                $this->dateToIssue;
+
+            $saleDate = empty($this->dateToSale) ?
+                date('Y-m-d', strtotime('now')) :
+                $this->dateToSale;
         }
 
         $paymentDate = date(

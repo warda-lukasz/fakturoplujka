@@ -1,0 +1,55 @@
+outputDir: "~/FV_test/"
+seller:
+    companyName: "Urbix Karolina Urbańska"
+    address: ul. Siewna 3/49
+    postalCode: 20-530
+    city: Gliwice
+    nip: 3124773306
+    regon: 459318867
+    account: PL98529072822854829387869849
+    bank: Santander Consumer Bank Spółka Akcyjna
+    fullName: Karolina Urbańska
+    invoiceTitlePrefix: urbix_
+customers:
+    - companyName: Wesoła Przygoda
+      address: ul. Wesoła 3/4
+      postalCode: 30-353
+      city: Kalisz
+      nip: 3269854009
+      invoices:
+          - product: Usługa serwisowa
+            payment: Przelew
+            net: 123
+            vat: 23
+            issueOnTheLastDay: false
+            dateToIssue: ""
+            dateToSale: ""
+            daysToPayment: 10
+            active: false
+            mpkCode: 123456
+          - product: Hosting
+            payment: Przelew
+            net: 1435
+            vat: 23
+            issueOnTheLastDay: true
+            dateToIssue: ""
+            dateToSale: ""
+            daysToPayment: 10
+            active: true
+            mpkCode: 123456
+    - companyName: Karambol IT sp. z.o.o
+      address: Malinowa 3/4
+      postalCode: 36-250
+      city: Warszawa
+      nip: 2450618534
+      invoices:
+          - product: Hosting
+            payment: Przelew
+            net: 1235
+            vat: 23
+            issueOnTheLastDay: true
+            dateToIssue: ""
+            dateToSale: ""
+            daysToPayment: 10
+            active: true
+            mpkCode: 123456

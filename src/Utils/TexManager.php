@@ -8,48 +8,39 @@ use Models\Invoice;
 class TexManager
 {
     private const string TEX_COMMAND = "pdflatex -interaction=nonstopmode -output-directory=%s %s.tex";
-    private const string TEX_TYPE = '.tex';
-    private const string PDF_TYPE = '.pdf';
 
-    private array $invoices;
+    private FilesHelper $filesHelper;
+    private DataManager $dataManager;
 
     public function __construct()
     {
-        $this->invoices = (new DataManager())->getInvoices();
-        FilesHelper::cleanDir(FilesHelper::TEMP_PATH);
+
+        $this->dataManager = new DataManager();
+        $this->filesHelper = new FilesHelper();
+        $this->filesHelper->cleanDir(FilesHelper::TEMP_PATH);
     }
 
     public function parseTemplate(): void
     {
-        /** @var Invoice $invoice */
-        foreach ($this->invoices as $key => $invoice) {
-            $this->makeFiles($invoice, $key + 1);
+        foreach ($this->dataManager->getInvoices() as $invoice) {
+            $this->compileTex($this->prepareInvoice($invoice));
         }
 
-        FilesHelper::cleanDir(FilesHelper::TEMP_PATH);
+        $this->filesHelper->cleanDir(FilesHelper::TEMP_PATH);
     }
 
-    private function makeFiles(Invoice $invoice, int $invoiceNumber): void
+    private function prepareInvoice(Invoice $invoice): string
     {
         $invoiceNumber = sprintf(
-            "%s_%s",
-            $invoiceNumber,
-            (new DateTime('now'))->format('m_Y')
-        );
-        $invoice->setInvoiceNumber(str_replace('_', '/', $invoiceNumber));
-
-        $filename = sprintf(
-            '%s_%s',
-            str_replace(' ', '', $invoice->getSeller()->getCompanyName()),
-            $invoiceNumber
+            "%s/%s",
+            $invoice->invoiceNumber,
+            (new DateTime('now'))->format('m/Y')
         );
 
-        file_put_contents(
-            FilesHelper::TEMP_PATH . $filename . self::TEX_TYPE,
-            $this->replacePlaceholders($invoice)
-        );
+        $invoice->setInvoiceNumber($invoiceNumber);
+        $content = $this->replacePlaceholders($invoice);
 
-        $this->compileTex($filename);
+        return $this->filesHelper->makeInvoiceFile($invoice, $content);
     }
 
     private function replacePlaceholders(Invoice $invoice): string
@@ -69,8 +60,10 @@ class TexManager
 
     private function compileTex(string $filename): void
     {
-        shell_exec($this->prepareCommand($filename));
-        $this->moveToOutput($filename);
+        $command = $this->prepareCommand($filename);
+        shell_exec($command);
+
+        $this->filesHelper->moveToOutput($filename, $this->dataManager->getOutput());
     }
 
     private function prepareCommand(string $filename): string
@@ -79,17 +72,6 @@ class TexManager
             self::TEX_COMMAND,
             FilesHelper::TEMP_PATH,
             FilesHelper::TEMP_PATH . $filename
-        );
-    }
-
-    private function moveToOutput(string $filename): void
-    {
-        rename(
-            FilesHelper::TEMP_PATH . $filename . self::PDF_TYPE,
-            FilesHelper::OUTPUT_BASE_PATH . pathinfo(
-                FilesHelper::TEMP_PATH . $filename . self::PDF_TYPE,
-                PATHINFO_BASENAME
-            )
         );
     }
 }
