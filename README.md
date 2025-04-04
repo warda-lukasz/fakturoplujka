@@ -26,4 +26,11 @@ chmod +x fakturoplujka.php
 ./fakturoplujka.php
 ```
 
+You can also pass some arguments... If you want to know more, run with -h or
+--help flag:
+
+```
+./fakturoplujka.php -h
+```
+
 ## Have fun! 🥳 🚀🚀🚀
