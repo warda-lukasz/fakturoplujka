@@ -7,9 +7,6 @@ invoices (in Polish format) with single item, using LaTeX
 
 ## Usage:
 
-Enter the appropriate data into the corresponding files in the ``config`` folder. 
-There you will find a sample configuration.
-
 Prepare your configuration file in the ``config`` folder. You can use the sample
 configuration file as a template.
 
