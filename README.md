@@ -7,23 +7,23 @@ invoices (in Polish format) with single item, using LaTeX 🤗
 
 ## Usage: 🧐
 
-Prepare your configuration file in the ``config`` folder. You can use the sample
-configuration file as a template.
+### Prepare your configuration file in the ``config`` folder. 
+You can use the sample configuration file as a template.
 
 ```
 cp config/config.yml.dist config/config.yml
 ```
 
-To test everything, run the app with the following command:
+### Make fakturoplujka.php executable:
 
-```bash
-make first
+```
+chmod +x fakturoplujka.php
 ```
 
-If everything is okay, you can generate invoices with the following command:
+### Run the script:
 
-```bash
-make fv
+```
+./fakturoplujka.php
 ```
 
 ## Have fun! 🥳 🚀🚀🚀

@@ -1,9 +1,0 @@
-version: '3.8'
-
-services:
-  fakturoplujka:
-    build: .
-    container_name: fakturoplujka
-    volumes:
-      - .:/app
-    command: php makeFV.php

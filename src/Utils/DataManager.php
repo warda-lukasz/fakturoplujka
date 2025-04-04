@@ -5,17 +5,19 @@ namespace Utils;
 use Models\Customer;
 use Models\Invoice;
 use Models\Seller;
-use RecursiveDirectoryIterator;
 use Symfony\Component\Yaml\Yaml;
-use Symfony\Componenet\VarDumper\VarDumper;
 
 class DataManager
 {
+    private bool $renderInactive;
+    private int $startNumber;
     private array $invoices;
     private string $output;
 
-    public function __construct()
+    public function __construct(bool $renderInactive = false, int $startNumber = 1)
     {
+        $this->renderInactive = $renderInactive;
+        $this->startNumber = $startNumber;
         $this->parseData();
     }
 
@@ -25,13 +27,17 @@ class DataManager
         $this->output = $config['outputDir'];
 
         $seller = new Seller($config['seller']);
-        $invoiceNumber = 1;
+        $invoiceNumber = max(1, $this->startNumber);
 
         foreach ($config['customers'] as $customerData) {
             $customer = new Customer($customerData);
 
             foreach ($customerData['invoices'] as $invoiceData) {
-                $invoice = new Invoice($invoiceData)
+                if (!$this->renderInactive && !$invoiceData['active']) {
+                    continue;
+                }
+
+                $invoice = (new Invoice($invoiceData))
                     ->setInvoiceName($seller->invoiceTitlePrefix . $invoiceNumber)
                     ->setInvoiceNumber($invoiceNumber)
                     ->setSeller($seller)

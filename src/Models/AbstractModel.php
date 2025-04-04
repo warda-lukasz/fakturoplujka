@@ -4,6 +4,7 @@ namespace Models;
 
 use Interfaces\ModelInterface;
 
+#[\AllowDynamicProperties]
 abstract class AbstractModel implements ModelInterface
 {
     protected const string MODEL_PREFIX = '';
@@ -15,17 +16,6 @@ abstract class AbstractModel implements ModelInterface
 
     public function setFromArray(array $arr): self
     {
-        foreach ($arr as $property => $value) {
-            $this->__set($property, $value);
-        }
-
-        return $this;
-    }
-
-    public function setFromFile(string $path): self
-    {
-        $arr = json_decode(file_get_contents($path), true);
-
         foreach ($arr as $property => $value) {
             $this->__set($property, $value);
         }

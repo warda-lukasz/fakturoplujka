@@ -4,7 +4,7 @@ namespace Interfaces;
 
 interface ModelInterface
 {
-    public function setFromFile(string $path): self;
+    public function setFromArray(array $arr): self;
 
     public function __get(string $property);
 

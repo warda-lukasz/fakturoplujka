@@ -12,10 +12,9 @@ class TexManager
     private FilesHelper $filesHelper;
     private DataManager $dataManager;
 
-    public function __construct()
+    public function __construct(bool $renderInactive = false, int $startNumber = 1)
     {
-
-        $this->dataManager = new DataManager();
+        $this->dataManager = new DataManager($renderInactive, $startNumber);
         $this->filesHelper = new FilesHelper();
         $this->filesHelper->cleanDir(FilesHelper::TEMP_PATH);
     }
