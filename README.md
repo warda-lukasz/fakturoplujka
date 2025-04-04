@@ -5,18 +5,18 @@
 Fakturoplujka is a small command line app, that allows you to generate beautiful 
 invoices (in Polish format) with single item, using LaTeX
 
-
 ## Usage:
 
 Enter the appropriate data into the corresponding files in the ``config`` folder. 
 There you will find a sample configuration.
-File structure is pretty self-explanatory. 
 
-Fill seller.json with your data.
+Prepare your configuration file in the ``config`` folder. You can use the sample
+configuration file as a template.
 
-Create your own configuration, creating folders containing invoice.json and customer.json 
-files with your customer and invoice data. 
-The app will generate as many invoices as folders have been created.
+```
+cp config/config.yml.dist config/config.yml
+```
+
 
 To test everything, run the app with the following command:
 
