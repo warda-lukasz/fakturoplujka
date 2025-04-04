@@ -1,11 +1,11 @@
-# Fakturoplujka
+# 🐘 Fakturoplujka 🐘
 
-## What am I?
+## What am I? 🤔
 
 Fakturoplujka is a small command line app, that allows you to generate beautiful 
-invoices (in Polish format) with single item, using LaTeX
+invoices (in Polish format) with single item, using LaTeX 🤗
 
-## Usage:
+## Usage: 🧐
 
 Prepare your configuration file in the ``config`` folder. You can use the sample
 configuration file as a template.
@@ -13,7 +13,6 @@ configuration file as a template.
 ```
 cp config/config.yml.dist config/config.yml
 ```
-
 
 To test everything, run the app with the following command:
 
@@ -27,4 +26,4 @@ If everything is okay, you can generate invoices with the following command:
 make fv
 ```
 
-## Have fun! 🥳
+## Have fun! 🥳 🚀🚀🚀
