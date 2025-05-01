@@ -37,3 +37,5 @@ config/*
 additional
 conf_backup
 copyOutput.sh
+.scannerwork
+sonar.sh
