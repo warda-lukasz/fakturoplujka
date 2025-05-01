@@ -37,7 +37,10 @@ abstract class AbstractModel implements ModelInterface
     {
         $arr = [];
         foreach ($this as $key => $value) {
-            if (is_object($value) || is_array($value)) continue;
+            if (is_object($value) || is_array($value)) {
+                continue;
+            }
+
             $keyString = $this::MODEL_PREFIX . $key;
             $arr["%(\/\/)({$keyString})(\/\/)%"] = $value;
         }

@@ -27,7 +27,10 @@ class FilesHelper
 
             /** @var SplFileInfo $file */
             foreach ($ri as $file) {
-                if ($file->getFilename() === self::GIT_KEEP) continue;
+                if ($file->getFilename() === self::GIT_KEEP) {
+                    continue;
+                }
+
                 $file->isDir() ? rmdir($file) : unlink($file);
             }
         }
