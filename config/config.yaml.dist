@@ -20,7 +20,7 @@ customers:
           - product: Usługa serwisowa
             payment: Przelew
             net: 123
-            vat: 23
+            vatRate: 23
             issueOnTheLastDay: false
             dateToIssue: ""
             dateToSale: ""
@@ -30,7 +30,7 @@ customers:
           - product: Hosting
             payment: Przelew
             net: 1435
-            vat: 23
+            vatRate: 23
             issueOnTheLastDay: true
             dateToIssue: ""
             dateToSale: ""
@@ -46,7 +46,7 @@ customers:
           - product: Hosting
             payment: Przelew
             net: 1235
-            vat: 23
+            vatRate: 23
             issueOnTheLastDay: true
             dateToIssue: ""
             dateToSale: ""

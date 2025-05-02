@@ -23,7 +23,7 @@ class DataManager
 
     private function parseData(): void
     {
-        $config = Yaml::parseFile(FilesHelper::CONFIG_PATH . 'config.yml');
+        $config = Yaml::parseFile(FilesHelper::CONFIG_PATH . 'config.yaml');
         $this->output = $config['outputDir'];
 
         $seller = new Seller($config['seller']);
